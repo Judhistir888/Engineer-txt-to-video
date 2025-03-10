@@ -109,8 +109,8 @@ async def start(client: Client, msg: Message):
         "Use /help to see available commands."
     )
 
-# Engineer/Upload command handler
-@bot.on_message(filters.command(["engineer", "upload"]))
+# Engineer/Upload command handler, engineer removed
+@bot.on_message(filters.command(["upload"]))
 async def engineer_upload(client: Client, msg: Message):
     # Check authorization
     if not (is_authorized(msg.from_user.id) or is_authorized_channel(msg.chat.id) or is_authorized_group(msg.chat.id)):
@@ -124,7 +124,7 @@ async def engineer_upload(client: Client, msg: Message):
     await input.delete(True)
 
     file_name, ext = os.path.splitext(os.path.basename(x))
-    credit = "𝕰𝖓𝖌𝖎𝖓𝖊𝖊𝖗𝖘 𝕭𝖆𝖇𝖚™"
+    credit = "" #Add your credit text
 
     try:
         with open(x, "r") as f:
@@ -197,7 +197,7 @@ async def engineer_upload(client: Client, msg: Message):
 
             await editable.edit(f"Downloading: **{name}**")
             os.system(cmd)
-            await bot.send_video(msg.chat.id, f"{name}.mp4", caption=f"**{name}**\n\nUploaded by {CR}")
+            await bot.send_video(msg.chat.id, f"{name}.mp4", caption=f"**{name}**\n")
             os.remove(f"{name}.mp4")
             count += 1
         except Exception as e:
@@ -320,7 +320,7 @@ async def help_command(client: Client, msg: Message):
     help_text = (
         "🌟 **Available Commands** 🌟\n\n"
         "/start - Start the bot\n"
-        "/engineer or /upload - Download and upload files (Authorized only)\n"
+        "/upload - Download and upload files (Authorized only)\n"
         "/adduser - Add a user (Sudo only)\n"
         "/removeuser - Remove a user (Sudo only)\n"
         "/addchannel - Add a channel (Sudo only)\n"
