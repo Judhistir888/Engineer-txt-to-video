@@ -1,8 +1,8 @@
-# Don't Remove Credit Telegram - @Engineers_Babu
 import time
 import math
 import os
 from pyrogram.errors import FloodWait
+from datetime import datetime, timedelta
 
 class Timer:
     def __init__(self, time_between=5):
@@ -15,12 +15,8 @@ class Timer:
             return True
         return False
 
-
-from datetime import datetime,timedelta
-
-def hrb(value, digits= 2, delim= "", postfix=""):
-    """Return a human-readable file size.
-    """
+def hrb(value, digits=2, delim="", postfix=""):
+    """Return a human-readable file size."""
     if value is None:
         return None
     chosen_unit = "B"
@@ -32,12 +28,10 @@ def hrb(value, digits= 2, delim= "", postfix=""):
             break
     return f"{value:.{digits}f}" + delim + chosen_unit + postfix
 
-def hrt(seconds, precision = 0):
-    """Return a human-readable time delta as a string.
-    """
+def hrt(seconds, precision=0):
+    """Return a human-readable time delta as a string."""
     pieces = []
     value = timedelta(seconds=seconds)
-    
 
     if value.days:
         pieces.append(f"{value.days}d")
@@ -61,8 +55,6 @@ def hrt(seconds, precision = 0):
         return "".join(pieces)
 
     return "".join(pieces[:precision])
-
-
 
 timer = Timer()
 
@@ -89,9 +81,8 @@ async def progress_bar(current, total, reply, start):
             completed_length = int(current * bar_length / total)
             remaining_length = bar_length - completed_length
             progress_bar = "▰" * completed_length + "▱" * remaining_length
-            
-            try:
-                await reply.edit(f'<b>\n ╭──⌯════🆄︎ᴘʟᴏᴀᴅɪɴɢ⬆️⬆️═════⌯──╮ \n├⚡ {progress_bar}|﹝{perc}﹞ \n├🚀 Speed » {sp} \n├📟 Processed » {cur}\n├🧲 Size - ETA » {tot} - {eta} \n├🤖 𝔹ʏ » @Engineers_Babu\n╰─═══ ✪ @Engineers_Babu ✪ ═══─╯\n</b>') 
-            except FloodWait as e:
-                time.sleep(e.x)
 
+            try:
+                await reply.edit(f'Progress: {progress_bar} | {perc}\nSpeed: {sp}\nETA: {eta}\nTotal: {tot}\nCurrent: {cur}')
+            except FloodWait as e:
+                time.sleep(e.x
